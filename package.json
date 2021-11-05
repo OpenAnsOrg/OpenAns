@@ -1,0 +1,28 @@
+{
+  "name": "openans",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.5.0",
+    "@emotion/styled": "^11.3.0",
+    "@mui/material": "^5.0.6",
+    "firebase": "^9.3.0",
+    "formik": "^2.2.9",
+    "next": "12.0.2",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "react-firebase-hooks": "^4.0.0",
+    "yup": "^0.32.11"
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.34",
+    "eslint": "7",
+    "eslint-config-next": "12.0.2",
+    "typescript": "^4.4.4"
+  }
+}
