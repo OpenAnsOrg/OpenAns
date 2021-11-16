@@ -3,6 +3,8 @@ import { authHandle } from "../firebase/client";
 import { signOut } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Loading from "./Loading";
+import LoginIcon from '@mui/icons-material/Login';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 const Log = () => {
   const [user, loading] = useAuthState(authHandle);
@@ -17,6 +19,7 @@ const Log = () => {
           await signOut(authHandle);
           window.location.replace("/signin");
         }}
+        endIcon={<LogoutIcon />}
       >
         SignOut
       </Button>
@@ -26,6 +29,7 @@ const Log = () => {
     <Button
       variant="contained"
       onClick={() => window.location.replace("/signin")}
+      startIcon={<LoginIcon />}
     >
       Sign In
     </Button>

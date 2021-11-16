@@ -12,6 +12,7 @@ import Logo from "../../public/Logo.png";
 import Menu from "./Menu";
 import Loading from "./Loading";
 import Log from "./Log";
+import Sidebar from "./Sidebar";
 
 const Header = () => {
   const [user, loading] = useAuthState(authHandle);
@@ -22,7 +23,7 @@ const Header = () => {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" sx={{ backgroundColor: "background.default" }}>
         <Toolbar
-          sx={{ px: ".2rem", display: "flex", justifyContent: "space-between" }}
+          sx={{ pl: ".5rem", display: "flex", justifyContent: "space-between" }}
         >
           <Button variant="text" href="/">
             <Image src={Logo} alt="OpenAns" width={30} height={30} />
@@ -38,13 +39,14 @@ const Header = () => {
               OpenAns
             </Typography>
           </Button>
-          {user ? (
-            <Box>
+          <Box>
+            <Box sx={{ display: { xs: "block", sm: "block", md: "none" } }}>
+              <Sidebar />
+            </Box>
+            <Box sx={{ display: { xs: "none", sm: "none", md: "block" } }}>
               <Menu />
             </Box>
-          ) : (
-            <Log />
-          )}
+          </Box>
         </Toolbar>
       </AppBar>
     </Box>

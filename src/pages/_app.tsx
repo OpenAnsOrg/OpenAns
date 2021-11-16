@@ -30,6 +30,7 @@ export default function MyApp(props) {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
+            mb: "2rem"
           }}
         >
           <Component {...pageProps} />

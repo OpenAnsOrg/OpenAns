@@ -15,15 +15,15 @@ import {
   getDocs,
   collection
 } from "firebase/firestore";
-import { uploadBytes, ref } from "firebase/storage";
 import { useState, useEffect } from "react";
+import moment from "moment";
 
 const Signup = () => {
-  const [image, setImage] = useState(null);
   const [emailInUse, setEmailInUse] = useState(false);
+  const [usernameInUse, setUsernameInUse] = useState(false);
 
   const validationSchema = yup.object({
-    name: yup.string().required("Name is required"),
+    name: yup.string().required("Username is required"),
     email: yup
       .string()
       .email("Invalid email")
@@ -65,6 +65,7 @@ const Signup = () => {
               desc: values.desc,
               org: values.org,
               email: values.email,
+              joinedOn: moment().unix(),
               saved: [],
               answers: [],
               likes: [],
@@ -100,6 +101,23 @@ const Signup = () => {
     })();
   }, [formik.values.email]);
 
+  useEffect(() => {
+    (async () => {
+      const usersRef = collection(storeHandle, "users");
+      const q = query(usersRef, where("name", "==", formik.values.name));
+      const querySnapshot = await getDocs(q);
+      const data = [];
+      querySnapshot.forEach((doc) => {
+        data.push(doc.data);
+      });
+      if (data.length !== 0) {
+        setUsernameInUse(true);
+      } else {
+        setUsernameInUse(false);
+      }
+    })();
+  }, [formik.values.name]);
+
   return (
     <Box
       sx={{
@@ -131,7 +149,7 @@ const Signup = () => {
           <TextField
             id="name"
             name="name"
-            label="Name"
+            label="Username"
             variant="outlined"
             value={formik.values.name}
             onChange={formik.handleChange}
@@ -141,7 +159,9 @@ const Signup = () => {
             sx={{ m: "1rem", maxWidth: "29rem" }}
             fullWidth
           />
-          
+          {usernameInUse ? (
+            <Typography variant="caption">Username already taken</Typography>
+          ) : null}
           <TextField
             id="email"
             name="email"
@@ -170,6 +190,7 @@ const Signup = () => {
             onBlur={formik.handleBlur}
             sx={{ m: "1rem", maxWidth: "29rem" }}
             fullWidth
+            multiline
           />
           <TextField
             id="org"

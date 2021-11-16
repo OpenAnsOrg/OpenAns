@@ -3,19 +3,19 @@ import { authHandle } from "../../firebase/client"
 import { useAuthState } from "react-firebase-hooks/auth";
 import Loading from "../../components/Loading";
 
-const Browse = () => {
+const Profile = () => {
   const [user, loading] = useAuthState(authHandle);
   if (loading) {
     return <Loading />
   }
   if(!user) {
-    return <Typography variant="h4">You must be logged in to create answers</Typography>
+    return <Typography variant="h4" sx={{ my: "2rem" }}>You must be logged in to see profiles</Typography>
   }
   return (
     <Typography variant="h4" sx={{ my: "2rem" }}>
-      Browse
+      Profile
     </Typography>
   )
 }
 
-export default Browse
+export default Profile

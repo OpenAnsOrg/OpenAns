@@ -13,7 +13,7 @@ const Groups = () => {
   }
   return (
     <Typography variant="h4" sx={{ my: "2rem" }}>
-      Groups
+      Feauture to be released soon.
     </Typography>
   )
 }
